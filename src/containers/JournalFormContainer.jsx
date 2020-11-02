@@ -8,19 +8,18 @@ const JournalFormContainer = () => {
     journalDate: '',
     gratefulEntry: '',
     favoriteEntry: '',
-    stressRating: 1,
+    stressRating: '',
     stressDescription: '',
     stressManagement: ''
   });
     
 
-  const onSubmit = async(form) => {
-    await addJournalEntry({ ...form })
-      .then(res => res.ok);
+  const handleSubmit = e => {
+    e.preventDefault();
+    addJournalEntry(form);      
   };
 
   const onChange = e => {
-    e.preventDefault();
     setForm({
       ...form,
       [e.target.name]: e.target.value
@@ -30,7 +29,7 @@ const JournalFormContainer = () => {
   return (
     <JournalEntryForm 
       form={form}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       onChange={onChange}  
     />
   );
